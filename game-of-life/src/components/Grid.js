@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-
+import produce from 'immer';
 
 const Grid = ()=>{
 
@@ -26,10 +26,16 @@ const rows = [];
           rows.map((col, k) => (
             <div
               key={`${i}-${k}`}
+              onClick={()=> {
+                  const newGrid = produce(grid, gridCopy => {
+                      gridCopy[i][k] = grid[i][k] ? 0 : 1;
+                  });
+                  setGrid(newGrid);
+            }} //onclick state changes: use copygrid to change state of grid. immer allows immutable change and generates new grid to make changes to instead
               style={{
                 width: 25,
                 height: 25,
-                backgroundColor: grid[i][k] ? 'black' : 'undefined',
+                backgroundColor: grid[i][k] ? 'black' : undefined,
                 border: 'solid 1px purple',
               }}
             />
@@ -48,6 +54,8 @@ const rows = [];
         grid[i][k] ternary for colors on index of row and columns
         use index for rows, columns as key because they wont be moved
         display in grid div, repeat, set how big
+        FOR ONCLICK: to change state, using plugin called immer
+        immer: 
         */
         )
         }
