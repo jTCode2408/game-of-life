@@ -1,21 +1,95 @@
-import React, {useState} from 'react';
+import React, {useState, useCallback, useRef } from 'react';
 import produce from 'immer';
 
-const Grid = ()=>{
+function Grid(){
 
 const numRows = 50;
 const numCols = 50;
-const [grid, setGrid] = useState(() => {
-const rows = [];
+//TODO: operations to rep neighbors:
+//array of operations to do logic.
+//column doesnt change but row does
+//each location rep by operations
+const ops =[
+    [0,1],
+    [0,-1],
+    [1,-1],
+    [-1,1],
+    [1,1],
+    [-1,-1],
+    [1,0],
+    [-1,0]
+];
+
+const clearGrid = ()=>{
+    const rows = [];
     for (let i = 0; i < numRows; i++) {
-      rows.push(Array.from(Array(numCols).fill(0)));
-      // initialize array for columns, 2nd value is map, mapping 0s to each column
-      //0 means dead, 1 means alive
-    }
-    return rows;
+        rows.push(Array.from(Array(numCols).fill(0)));
+        // initialize array for columns, 2nd value is map, mapping 0s to each column
+        //0 means dead, 1 means alive
+      }
+      return rows;
+    };
+
+const [grid, setGrid] = useState(() => {
+
+ return clearGrid();
   });
 
+  const [running, setRunning] = useState(false);
+  const runRef = useRef(running);
+  runRef.current = running;
+
+  const runSim =useCallback(() =>{
+    if (!runRef.current){
+        return; //'base case' if not running
+    }
+    //TODO: impliment game LOGIC using setstate
+    setGrid(g =>{
+        return produce(g, gridCopy =>{ //pass in fn for current value of grid(g)
+            //return new value for grid: produce fn passing in g, & gridcopy, mutating over gridcopy. 
+            //loop over rows/columns
+            //get neighbors for each cell:
+            //
+            for(let i =0; i < numRows; i++){
+                for(let k =0; k < numCols; k++){
+                    let neighbors = 0;
+                    ops.forEach(([x, y])=> {
+                        const newI = i + x;
+                        const newK = k + y;
+                        if (newI >= 0 && newI <numRows && newK >= 0 && newK <numCols){
+                            neighbors += g[newI][newK]
+                        }// set boundaries for edges
+                    })
+                    //after find neighbors, implementRULES
+                    if (neighbors < 2 || neighbors > 3){
+                        gridCopy[i][k] = 0; //if neighrbors less than 2 or more than 3: live becomes dead
+                        //between 2-3 continues too live: dont need to change anything
+                    } else if (g[i][k] === 0 && neighbors ===3){
+                        gridCopy[i][k] = 1; //if dead and neighbors are exactly 3; become alive
+                    }
+                }
+            }
+        })
+    });
+    
+    setTimeout(runSim, 100); //call 'recursively' running runSim. Check if runnning, if not return. if is, setState to simlulate update. call function again to repeat.
+    }, []);
+
   return (
+      <>
+    <div className = 'control-cont'>
+    <h4> Control Panel</h4>
+    <button onClick={()=> {
+        setRunning(!running);
+        if (!running){
+        runRef.current = true;
+        runSim();
+        }
+    }}
+    >
+        {running ? 'stop' : 'start'}
+    </button>
+</div>
     
       <div style={{
           display: 'grid',
@@ -43,6 +117,7 @@ const rows = [];
         )}
       
 </div>
+</>
       /*GRID DISPLAY:
         map over grid state
         rows = array

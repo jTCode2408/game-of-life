@@ -9,7 +9,7 @@ function App() {
   return(
   <div>
     <h1>Game Of Life</h1>
-    <Controls/>
+    {/* <Controls/> */}
     <Grid/>
     </div> //App div end
   )
