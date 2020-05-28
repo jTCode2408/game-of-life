@@ -1,10 +1,9 @@
 //for control panel
-//start, stop, clear, pause?
-//generation # will also be here
-//randomize button? (addtoinal ftr)
-//speed input? (additional ftr)
-//manual steps? (additional ftr)
-//change grid zie? (additional ftr)
+//start, stop, clear, pause? --START/STOP/CLEAR ADDED
+//generation # will also be here -TODO
+//randomize button? (addtoinal ftr) -ADDED
+//speed input? (additional ftr)- TODO
+//change grid zie? (additional ftr) -TODO
 import React, {useState, useCallback, useRef} from 'react';
 
 

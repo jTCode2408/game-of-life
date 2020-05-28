@@ -5,7 +5,7 @@ function Grid(){
 
 const numRows = 50;
 const numCols = 50;
-//TODO: operations to rep neighbors:
+
 //array of operations to do logic.
 //column doesnt change but row does
 //each location rep by operations
@@ -39,7 +39,15 @@ const [grid, setGrid] = useState(() => {
   const runRef = useRef(running);
   runRef.current = running;
 
-  const runSim =useCallback(() =>{
+  const [interval, setInterval]=useState('');
+
+  const handleChange = (e) => { 
+    setInterval(e.target.value)
+}
+
+
+  
+  const runSim = useCallback(() =>{
     if (!runRef.current){
         return; //'base case' if not running
     }
@@ -72,13 +80,27 @@ const [grid, setGrid] = useState(() => {
         })
     });
     
-    setTimeout(runSim, 100); //call 'recursively' running runSim. Check if runnning, if not return. if is, setState to simlulate update. call function again to repeat.
+    setTimeout(runSim, interval); 
+    console.log(setTimeout)//call 'recursively' running runSim. Check if runnning, if not return. if is, setState to simlulate update. call function again to repeat.
+    //TODO: CHANGE SPEED TO USER INPUTTED VAR(EXTRA FEATURE)
     }, []);
+
 
   return (
       <>
     <div className = 'control-cont'>
-    <h4> Control Panel</h4>
+    <h4> Control Panel</h4> 
+  <h3> Gen #: </h3>
+    {/*TODO: DISPLAY CUREENT GENERATION # in runSim  */}
+    <div className='speed'> 
+    Speed: 
+    <input
+    type = 'text'
+    placeholder = 'speed'
+    value={interval}
+    onChange={handleChange} /> 
+    </div>
+
     <button onClick={()=> {
         setRunning(!running);
         if (!running){
@@ -87,13 +109,26 @@ const [grid, setGrid] = useState(() => {
         }
     }}
     >
-        {running ? 'stop' : 'start'}
+    {running ? 'Stop' : 'Start'}
     </button>
+    <button onClick={()=>{
+        setGrid(clearGrid());
+    }}
+    > Clear </button>
+    <button onClick={()=>{
+        const rows = [];
+        for (let i = 0; i < numRows; i++) {
+         rows.push(Array.from(Array(numCols), () => (Math.random() > 0.7 ? 1 : 0))
+         );
+        }
+        setGrid(rows);
+    }}
+    > Random </button>
 </div>
     
       <div style={{
           display: 'grid',
-          gridTemplateColumns: `repeat(${numCols}, 25px)`,
+          gridTemplateColumns: `repeat(${numCols}, 25px)`, //TODO, CHANGE SIZE OR USER INPUT?
         }}
       >
         {grid.map((rows, i) =>
@@ -109,7 +144,7 @@ const [grid, setGrid] = useState(() => {
               style={{
                 width: 25,
                 height: 25,
-                backgroundColor: grid[i][k] ? 'black' : undefined,
+                backgroundColor: grid[i][k] ? 'black' : undefined, //TODO: CHANGE COLOR, OR USER INPUT?
                 border: 'solid 1px purple',
               }}
             />
