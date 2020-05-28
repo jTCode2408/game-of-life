@@ -1,9 +1,9 @@
-# game-of-life
+## game-of-life
  * Conway's Game Of Life coded in ReactJs *
  
 ## Research:
 
-## About The Game:
+# About The Game:
 * Created by John Conway, a British mathmetician, in 1970.
 * Zero player game, that evolves by state without needing further input from players.
 * Start game by creating an initial configuration and watching how it evolves. 
