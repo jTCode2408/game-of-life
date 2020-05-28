@@ -112,9 +112,11 @@ const [grid, setGrid] = useState(() => {
 
     <button onClick={()=> {
         setRunning(!running);
-        if (!running){
+        if (!running && interval){
         runRef.current = true;
         runSim();
+        } else if(!interval){
+            alert('need for speed');
         }
     }}
     >
@@ -147,15 +149,17 @@ const [grid, setGrid] = useState(() => {
             <div
               key={`${i}-${k}`}
               onClick={()=> {
+                  if (!running){
                   const newGrid = produce(grid, gridCopy => {
                       gridCopy[i][k] = grid[i][k] ? 0 : 1;
                   });
                   setGrid(newGrid);
+                } //not clickable while running
             }} //onclick state changes: use copygrid to change state of grid. immer allows immutable change and generates new grid to make changes to instead, act as double buffering
               style={{
                 width: 25,
                 height: 25,
-                backgroundColor: grid[i][k] ? 'black' : undefined, //TODO: CHANGE COLOR, OR USER INPUT?
+                backgroundColor: grid[i][k] ? 'gold' : 'black', 
                 border: 'solid 1px purple',
               }}
             />
@@ -171,7 +175,7 @@ const [grid, setGrid] = useState(() => {
         display dv that is box with 25 by 25 size
         background color is based of if 0 or 1(dead or alive)
         use index to get row/column index for color changing
-        (alive = white, dead = blk)
+        (alive = gold, dead = blk)
         grid[i][k] ternary for colors on index of row and columns
         use index for rows, columns as key because they wont be moved
         display in grid div, repeat, set how big
