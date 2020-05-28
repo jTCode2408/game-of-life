@@ -31,6 +31,7 @@ const clearGrid = ()=>{
         //0 means dead, 1 means alive
        
       }
+      
       return rows;
     };
 
@@ -42,7 +43,7 @@ const [grid, setGrid] = useState(() => {
   const runRef = useRef(running);
   runRef.current = running;
 
-  const [interval, setInterval]=useState(100);
+  const [interval, setInterval]=useState('');
   const intRef = useRef(interval);
   intRef.current = interval;
   
@@ -87,11 +88,11 @@ const [grid, setGrid] = useState(() => {
         })
     });
     
-    setTimeout(runSim, intRef); 
+    setTimeout(runSim, intRef.current); //intref for speed change
     setGen(genRef.current+1) //use ref to generation to update count
 //call 'recursively' running runSim. Check if runnning, if not return. if is, setState to simlulate update. call function again to repeat.
     //TODO: CHANGE SPEED TO USER INPUTTED VAR(EXTRA FEATURE)
-    }, []);
+    }, [ops]);
 
 
   return (
@@ -103,9 +104,9 @@ const [grid, setGrid] = useState(() => {
     <div className='speed'> 
     Speed: 
     <input
-    type = 'text'
+    name='speed'
     placeholder = 'speed'
-    value={interval}
+    value={intRef.current}
     onChange={handleChange} /> 
     </div>
 
@@ -120,7 +121,7 @@ const [grid, setGrid] = useState(() => {
     {running ? 'Stop' : 'Start'}
     </button>
     <button onClick={()=>{
-        genRef.current = 0;
+        setGen(0)
         setGrid(clearGrid());
 
     }}

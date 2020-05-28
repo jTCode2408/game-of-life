@@ -1,8 +1,8 @@
 //for control panel
-//start, stop, clear, pause? --START/STOP/CLEAR ADDED
-//generation # will also be here -ADDED )NEED TO DO RESET ON CLEAR
+//start, stop, clear --START/STOP/CLEAR ADDED
+//generation # will also be here -ADDED
 //randomize button? (addtoinal ftr) -ADDED
-//speed input? (additional ftr)- TODO
+//speed input? (additional ftr)- ADDED
 //change grid zie? (additional ftr) -TODO
 import React, {useState, useCallback, useRef} from 'react';
 
