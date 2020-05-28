@@ -19,7 +19,7 @@ const ops =[
     [1,0],
     [-1,0]
 ];
-
+const [generation, setGen] = useState(0);
 const clearGrid = ()=>{
     const rows = [];
     for (let i = 0; i < numRows; i++) {
@@ -31,7 +31,7 @@ const clearGrid = ()=>{
     };
 
 const [grid, setGrid] = useState(() => {
-
+setGen();
  return clearGrid();
   });
 
@@ -80,8 +80,13 @@ const [grid, setGrid] = useState(() => {
         })
     });
     
-    setTimeout(runSim, interval); 
-    console.log(setTimeout)//call 'recursively' running runSim. Check if runnning, if not return. if is, setState to simlulate update. call function again to repeat.
+    setTimeout(runSim, setInterval); 
+    setGen(g=> {
+        return produce(g, gridCopy =>{
+            setGen(generation+1)
+    })
+})
+//call 'recursively' running runSim. Check if runnning, if not return. if is, setState to simlulate update. call function again to repeat.
     //TODO: CHANGE SPEED TO USER INPUTTED VAR(EXTRA FEATURE)
     }, []);
 
@@ -90,7 +95,7 @@ const [grid, setGrid] = useState(() => {
       <>
     <div className = 'control-cont'>
     <h4> Control Panel</h4> 
-  <h3> Gen #: </h3>
+  <h3> Gen #: {generation}</h3>
     {/*TODO: DISPLAY CUREENT GENERATION # in runSim  */}
     <div className='speed'> 
     Speed: 
@@ -140,7 +145,7 @@ const [grid, setGrid] = useState(() => {
                       gridCopy[i][k] = grid[i][k] ? 0 : 1;
                   });
                   setGrid(newGrid);
-            }} //onclick state changes: use copygrid to change state of grid. immer allows immutable change and generates new grid to make changes to instead
+            }} //onclick state changes: use copygrid to change state of grid. immer allows immutable change and generates new grid to make changes to instead, act as double buffering
               style={{
                 width: 25,
                 height: 25,
