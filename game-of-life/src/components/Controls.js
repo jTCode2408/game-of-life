@@ -1,6 +1,6 @@
 //for control panel
 //start, stop, clear, pause? --START/STOP/CLEAR ADDED
-//generation # will also be here -TODO
+//generation # will also be here -ADDED )NEED TO DO RESET ON CLEAR
 //randomize button? (addtoinal ftr) -ADDED
 //speed input? (additional ftr)- TODO
 //change grid zie? (additional ftr) -TODO

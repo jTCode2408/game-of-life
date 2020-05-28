@@ -20,18 +20,21 @@ const ops =[
     [-1,0]
 ];
 const [generation, setGen] = useState(0);
+const genRef = useRef(generation)
+genRef.current = generation
+
 const clearGrid = ()=>{
     const rows = [];
     for (let i = 0; i < numRows; i++) {
         rows.push(Array.from(Array(numCols).fill(0)));
         // initialize array for columns, 2nd value is map, mapping 0s to each column
         //0 means dead, 1 means alive
+       
       }
       return rows;
     };
 
 const [grid, setGrid] = useState(() => {
-setGen();
  return clearGrid();
   });
 
@@ -39,7 +42,10 @@ setGen();
   const runRef = useRef(running);
   runRef.current = running;
 
-  const [interval, setInterval]=useState('');
+  const [interval, setInterval]=useState(100);
+  const intRef = useRef(interval);
+  intRef.current = interval;
+  
 
   const handleChange = (e) => { 
     setInterval(e.target.value)
@@ -67,6 +73,7 @@ setGen();
                         if (newI >= 0 && newI <numRows && newK >= 0 && newK <numCols){
                             neighbors += g[newI][newK]
                         }// set boundaries for edges
+                        //GRIDcOPY[i][k]=0 to make all edges dead?
                     })
                     //after find neighbors, implementRULES
                     if (neighbors < 2 || neighbors > 3){
@@ -80,12 +87,8 @@ setGen();
         })
     });
     
-    setTimeout(runSim, setInterval); 
-    setGen(g=> {
-        return produce(g, gridCopy =>{
-            setGen(generation+1)
-    })
-})
+    setTimeout(runSim, intRef); 
+    setGen(genRef.current+1) //use ref to generation to update count
 //call 'recursively' running runSim. Check if runnning, if not return. if is, setState to simlulate update. call function again to repeat.
     //TODO: CHANGE SPEED TO USER INPUTTED VAR(EXTRA FEATURE)
     }, []);
@@ -95,7 +98,7 @@ setGen();
       <>
     <div className = 'control-cont'>
     <h4> Control Panel</h4> 
-  <h3> Gen #: {generation}</h3>
+  <h3> GENERATION: {generation}</h3>
     {/*TODO: DISPLAY CUREENT GENERATION # in runSim  */}
     <div className='speed'> 
     Speed: 
@@ -117,7 +120,9 @@ setGen();
     {running ? 'Stop' : 'Start'}
     </button>
     <button onClick={()=>{
+        genRef.current = 0;
         setGrid(clearGrid());
+
     }}
     > Clear </button>
     <button onClick={()=>{
