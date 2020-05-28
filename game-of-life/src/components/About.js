@@ -1,6 +1,6 @@
 //rules of game
 //about game
-
+import React from 'react';
 const About =() =>{
 
     return (
@@ -21,3 +21,5 @@ const About =() =>{
         </div>
     )
 }
+
+export default About;

@@ -3,8 +3,8 @@ import produce from 'immer';
 
 function Grid(){
 
-const numRows = 50;
-const numCols = 50;
+const numRows = 25;
+const numCols = 25;
 
 //array of operations to do logic.
 //column doesnt change but row does
