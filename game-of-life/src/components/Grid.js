@@ -1,39 +1,14 @@
 import React, {useState, useCallback, useRef } from 'react';
 import produce from 'immer';
+import {numCols, numRows, ops, clearGrid} from './Helpers'
+import {Gen, StyledButton, GridHolder} from './styles';
+
 
 function Grid(){
 
-const numRows = 25;
-const numCols = 25;
-
-//array of operations to do logic.
-//column doesnt change but row does
-//each location rep by operations
-const ops =[
-    [0,1],
-    [0,-1],
-    [1,-1],
-    [-1,1],
-    [1,1],
-    [-1,-1],
-    [1,0],
-    [-1,0]
-];
 const [generation, setGen] = useState(0);
 const genRef = useRef(generation)
 genRef.current = generation
-
-const clearGrid = ()=>{
-    const rows = [];
-    for (let i = 0; i < numRows; i++) {
-        rows.push(Array.from(Array(numCols).fill(0)));
-        // initialize array for columns, 2nd value is map, mapping 0s to each column
-        //0 means dead, 1 means alive
-       
-      }
-      
-      return rows;
-    };
 
 const [grid, setGrid] = useState(() => {
  return clearGrid();
@@ -47,24 +22,17 @@ const [grid, setGrid] = useState(() => {
   const intRef = useRef(interval);
   intRef.current = interval;
   
-
   const handleChange = (e) => { 
     setInterval(e.target.value)
 }
 
 
-  
   const runSim = useCallback(() =>{
     if (!runRef.current){
         return; //'base case' if not running
     }
-    //TODO: impliment game LOGIC using setstate
     setGrid(g =>{
-        return produce(g, gridCopy =>{ //pass in fn for current value of grid(g)
-            //return new value for grid: produce fn passing in g, & gridcopy, mutating over gridcopy. 
-            //loop over rows/columns
-            //get neighbors for each cell:
-            //
+        return produce(g, gridCopy =>{ 
             for(let i =0; i < numRows; i++){
                 for(let k =0; k < numCols; k++){
                     let neighbors = 0;
@@ -73,44 +41,41 @@ const [grid, setGrid] = useState(() => {
                         const newK = k + y;
                         if (newI >= 0 && newI <numRows && newK >= 0 && newK <numCols){
                             neighbors += g[newI][newK]
-                        }// set boundaries for edges
-                        //GRIDcOPY[i][k]=0 to make all edges dead?
+                        }
                     })
-                    //after find neighbors, implementRULES
+        
                     if (neighbors < 2 || neighbors > 3){
-                        gridCopy[i][k] = 0; //if neighrbors less than 2 or more than 3: live becomes dead
-                        //between 2-3 continues too live: dont need to change anything
+                        gridCopy[i][k] = 0;
                     } else if (g[i][k] === 0 && neighbors ===3){
-                        gridCopy[i][k] = 1; //if dead and neighbors are exactly 3; become alive
+                        gridCopy[i][k] = 1; 
                     }
                 }
             }
         })
-    });
+        
+    })
+
     
-    setTimeout(runSim, intRef.current); //intref for speed change
-    setGen(genRef.current+1) //use ref to generation to update count
-//call 'recursively' running runSim. Check if runnning, if not return. if is, setState to simlulate update. call function again to repeat.
-    //TODO: CHANGE SPEED TO USER INPUTTED VAR(EXTRA FEATURE)
+    setTimeout(runSim, intRef.current); 
+    setGen(genRef.current+1) 
     }, [ops]);
 
 
   return (
-      <>
+      <GridHolder>
+
     <div className = 'control-cont'>
-    <h4> Control Panel</h4> 
-  <h3> GENERATION: {generation}</h3>
-    {/*TODO: DISPLAY CUREENT GENERATION # in runSim  */}
+  <Gen> GENERATION: {generation}</Gen>
     <div className='speed'> 
     Speed: 
-    <input
+     <input
     name='speed'
     placeholder = 'speed'
     value={intRef.current}
     onChange={handleChange} /> 
     </div>
 
-    <button onClick={()=> {
+    <StyledButton onClick={()=> {
         setRunning(!running);
         if (!running && interval){
         runRef.current = true;
@@ -121,14 +86,15 @@ const [grid, setGrid] = useState(() => {
     }}
     >
     {running ? 'Stop' : 'Start'}
-    </button>
-    <button onClick={()=>{
+    </StyledButton>
+    
+    <StyledButton onClick={()=>{
         setGen(0)
         setGrid(clearGrid());
 
     }}
-    > Clear </button>
-    <button onClick={()=>{
+    > Clear </StyledButton>
+    <StyledButton onClick={()=>{
         const rows = [];
         for (let i = 0; i < numRows; i++) {
          rows.push(Array.from(Array(numCols), () => (Math.random() > 0.7 ? 1 : 0))
@@ -136,12 +102,14 @@ const [grid, setGrid] = useState(() => {
         }
         setGrid(rows);
     }}
-    > Random </button>
-</div>
+    > Random </StyledButton>
+
+        </div>   
     
       <div style={{
           display: 'grid',
-          gridTemplateColumns: `repeat(${numCols}, 25px)`, //TODO, CHANGE SIZE OR USER INPUT?
+          gridTemplateColumns: `repeat(${numCols}, 25px)`,
+          boxSizing: 'border-box' 
         }}
       >
         {grid.map((rows, i) =>
@@ -167,7 +135,7 @@ const [grid, setGrid] = useState(() => {
         )}
       
 </div>
-</>
+</GridHolder>
       /*GRID DISPLAY:
         map over grid state
         rows = array

@@ -1,20 +1,23 @@
 import React, { useState } from "react";
 import "./App.css";
 import Grid from './components/Grid'
-import Controls from './components/Controls';
 import About from './components/About';
+import {Pages, AppCont, Title} from './components/styles'
+
 function App() {
+  
   return(
-  <div className = 'app-cont'>
+  <AppCont>
     <div className = 'home-title'>
-    <h1>Game Of Life</h1>
+    <Title>Game Of Life</Title>
     </div> 
-    <div className = 'pages'>
-    {/* <Controls/> */}
+    <Pages>
+
     <Grid/>
     <About/>
-    </div>
-    </div> //App div end
+
+    </Pages>
+    </AppCont> //App div end
   )
 }
 
