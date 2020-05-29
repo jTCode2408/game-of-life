@@ -33,3 +33,4 @@
 
 
 # Deployed at:
+https://jtcode2408.github.io/game-of-life/
