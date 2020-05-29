@@ -5,7 +5,6 @@ import styled from 'styled-components'
 export const AppCont = styled.div`
 text-align: center;
 box-sizing: border-box;
-border: 2px solid red;
 display:flex;
 flex-direction:column;
 
@@ -33,20 +32,37 @@ justify-content: center;
 
 
 ////CONTROLS///
-export const ControlTitle = styled.h2`
+export const Gen = styled.h2`
 font-size: 30px;
 color: teal;
 background-color:grey;
 `
 
+export const GridHolder = styled.div`
+padding: 3%;
+`
 
 export const StyledButton = styled.button`
-
+background-color:teal;
+color: grey;
+width:15%;
+font-size: 16px;
+font-weight: bold;
+border-radius: 10%;
+height: 30px;
+margin-left:5%;
+margin-right:5%;
+margin-top: 5px;
+margin-bottom: 5px;
+border-style:none;
 `
 
 ///////ABOUT PAGE///////
 export const AboutCont = styled.div`
-border: 2px solid green
+display:flex;
+flex-direction:column;
+justify-content: space-between;
+padding: 5%;
 
 `
 

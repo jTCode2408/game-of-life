@@ -1,5 +1,4 @@
-//rules of game
-//about game
+
 import React from 'react';
 import {AboutCont, RulesTitle, StoryTitle} from './styles'
 const About =() =>{
@@ -8,7 +7,7 @@ const About =() =>{
         <AboutCont>
             <div>
             <RulesTitle> Rules of Life: </RulesTitle>
-            <ol>
+            <ul>
                 <li>
                 Any live cell with two or three live neighbours survives.
                 </li>
@@ -18,7 +17,7 @@ const About =() =>{
                 <li>
                 All other live cells die in the next generation. Similarly, all other dead cells stay dead.
                 </li>
-            </ol>
+            </ul>
 
             </div>
             <div className = 'story-head'>
