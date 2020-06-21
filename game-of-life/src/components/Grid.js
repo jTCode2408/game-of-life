@@ -29,7 +29,7 @@ const [grid, setGrid] = useState(() => {
 
   const runSim = useCallback(() =>{
     if (!runRef.current){
-        return; //'base case' if not running
+        return; 
     }
     setGrid(g =>{
         return produce(g, gridCopy =>{ 
@@ -62,8 +62,8 @@ const [grid, setGrid] = useState(() => {
 
 
   return (
-      <GridHolder>
-
+      
+    <>
     <div className = 'control-cont'>
   <Gen> GENERATION: {generation}</Gen>
     <div className='speed'> 
@@ -105,11 +105,15 @@ const [grid, setGrid] = useState(() => {
     > Random </StyledButton>
 
         </div>   
-    
+       
+    <GridHolder>
+      
       <div style={{
           display: 'grid',
           gridTemplateColumns: `repeat(${numCols}, 25px)`,
-          boxSizing: 'border-box' 
+          boxSizing: 'border-box',
+          margin:'5%'
+              
         }}
       >
         {grid.map((rows, i) =>
@@ -122,8 +126,8 @@ const [grid, setGrid] = useState(() => {
                       gridCopy[i][k] = grid[i][k] ? 0 : 1;
                   });
                   setGrid(newGrid);
-                } //not clickable while running
-            }} //onclick state changes: use copygrid to change state of grid. immer allows immutable change and generates new grid to make changes to instead, act as double buffering
+                } 
+            }} 
               style={{
                 width: 25,
                 height: 25,
@@ -135,7 +139,9 @@ const [grid, setGrid] = useState(() => {
         )}
       
 </div>
+
 </GridHolder>
+</>
       /*GRID DISPLAY:
         map over grid state
         rows = array

@@ -7,6 +7,8 @@ text-align: center;
 box-sizing: border-box;
 display:flex;
 flex-direction:column;
+border:2px solid blue;
+width:100%;
 
 `
 
@@ -36,16 +38,19 @@ export const Gen = styled.h2`
 font-size: 30px;
 color: teal;
 background-color:grey;
+margin-left:5%;
+width:100%;
+display:block
 `
 
 export const GridHolder = styled.div`
-padding: 3%;
+box-sizing:border-box;
 `
 
 export const StyledButton = styled.button`
 background-color:teal;
 color: grey;
-width:15%;
+width:37%;
 font-size: 16px;
 font-weight: bold;
 border-radius: 10%;
@@ -67,19 +72,25 @@ padding: 5%;
 `
 
 export const RulesCont = styled.div`
-
+width:100%;
+height:90px
+padding:0;
 `
 
 export const RulesTitle = styled.h2`
-font-size: 24px;
+font-size: 28px;
 color: teal;
 `
 
-export const RulesList = styled.ol`
-
+export const RulesList = styled.ul`
+height: 90px;
+width:100%
 `
 
 export const RulesItems = styled.li`
+width:95%;
+text-align: left;
+font-size: 18px;
 
 `
 
