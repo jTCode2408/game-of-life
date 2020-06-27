@@ -1,5 +1,5 @@
 # Deployed at:
-game-of-life.jasmineterry.vercel.app
+https://game-of-life.jasmineterry.vercel.app/
 
 
 # game-of-life
