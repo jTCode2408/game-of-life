@@ -1,5 +1,5 @@
 # Deployed at:
-https://jtcode2408.github.io/game-of-life/
+game-of-life.jasmineterry.vercel.app
 
 
 # game-of-life
