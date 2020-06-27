@@ -1,22 +1,21 @@
-
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/*basic styles */
+a{
+  color: #C4EBC8;
+  text-decoration: none;
+cursor: grabbing;
+  
   }
-  to {
-    transform: rotate(360deg);
+
+  span{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   }
-}
+
+  input{
+    border-radius:10%;
+    height: 25px;
+    border-style: none;
+background-color:black;
+color:whitesmoke;
+
+
+  }

@@ -1,8 +1,8 @@
 ///helper functions 
-import React from 'react';
 
-export const numRows = 25;
-export const numCols = 25;
+
+export const numRows = 20;
+export const numCols = 20;
 
 export const ops =[
     [0,1],
