@@ -1,8 +1,7 @@
 import React, {useState, useCallback, useRef } from 'react';
 import produce from 'immer';
 import {numCols, numRows, ops, clearGrid} from './Helpers'
-import {Gen, StyledButton, GridHolder} from './styles';
-
+import {Gen, StyledButton, GridHolder, styledInput} from './styles';
 
 function Grid(){
 
@@ -67,10 +66,9 @@ const [grid, setGrid] = useState(() => {
     <div className = 'control-cont'>
   <Gen> GENERATION: {generation}</Gen>
     <div className='speed'> 
-    Speed: 
      <input
     name='speed'
-    placeholder = 'speed'
+    placeholder = 'speed(ms)'
     value={intRef.current}
     onChange={handleChange} /> 
     </div>
@@ -91,7 +89,7 @@ const [grid, setGrid] = useState(() => {
     <StyledButton onClick={()=>{
         setGen(0)
         setGrid(clearGrid());
-
+    
     }}
     > Clear </StyledButton>
     <StyledButton onClick={()=>{
@@ -110,10 +108,10 @@ const [grid, setGrid] = useState(() => {
       
       <div style={{
           display: 'grid',
-          gridTemplateColumns: `repeat(${numCols}, 25px)`,
+          gridTemplateColumns: `repeat(${numCols}, 30px)`,
           boxSizing: 'border-box',
           margin:'5%'
-              
+      
         }}
       >
         {grid.map((rows, i) =>
@@ -142,20 +140,6 @@ const [grid, setGrid] = useState(() => {
 
 </GridHolder>
 </>
-      /*GRID DISPLAY:
-        map over grid state
-        rows = array
-        rows.map =column
-        display dv that is box with 25 by 25 size
-        background color is based of if 0 or 1(dead or alive)
-        use index to get row/column index for color changing
-        (alive = gold, dead = blk)
-        grid[i][k] ternary for colors on index of row and columns
-        use index for rows, columns as key because they wont be moved
-        display in grid div, repeat, set how big
-        FOR ONCLICK: to change state, using plugin called immer
-        immer: 
-        */
         )
         }
 

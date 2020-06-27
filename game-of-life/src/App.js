@@ -9,6 +9,13 @@ function App() {
   return(
   <AppCont>
     <div className = 'home-title'>
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Special+Elite&display=swap');
+</style>
+
+</style>
     <Title>Game Of Life</Title>
     </div> 
     <Pages>
