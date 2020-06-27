@@ -1,6 +1,15 @@
+# Deployed at:
+https://jtcode2408.github.io/game-of-life/
+
+
 # game-of-life
- * Conway's Game Of Life coded in ReactJs *
- 
+* Conway's Game Of Life coded in ReactJs *
+
+# Built With:
+* ReactJS
+* Styled Components
+
+
 # Research:
 
 ## About The Game:
@@ -27,10 +36,3 @@
 * Any LIVE cell with 2 OR 3 live neighbors, lives to next generation. 
 * Any DEAD cell with 3 live neighbors, becomes alive in next generation.
 * All other live cells become DEAD in next generation, and dead cells STAY dead.
-
- 
-
-
-
-# Deployed at:
-https://jtcode2408.github.io/game-of-life/
