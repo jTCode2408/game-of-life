@@ -1,10 +1,9 @@
 import React, {useState, useCallback, useRef } from 'react';
 import produce from 'immer';
 import {numCols, numRows, ops, clearGrid} from './Helpers'
-import {Gen, StyledButton, GridHolder, styledInput} from './styles';
+import {Gen, StyledButton, GridHolder} from './styles';
 
 function Grid(){
-
 const [generation, setGen] = useState(0);
 const genRef = useRef(generation)
 genRef.current = generation
@@ -24,7 +23,6 @@ const [grid, setGrid] = useState(() => {
   const handleChange = (e) => { 
     setInterval(e.target.value)
 }
-
 
   const runSim = useCallback(() =>{
     if (!runRef.current){
@@ -50,8 +48,7 @@ const [grid, setGrid] = useState(() => {
                     }
                 }
             }
-        })
-        
+        })    
     })
 
     
@@ -59,9 +56,7 @@ const [grid, setGrid] = useState(() => {
     setGen(genRef.current+1) 
     }, [ops]);
 
-
   return (
-      
     <>
     <div className = 'control-cont'>
   <Gen> GENERATION: {generation}</Gen>
@@ -105,7 +100,6 @@ const [grid, setGrid] = useState(() => {
         </div>   
        
     <GridHolder>
-      
       <div style={{
           display: 'grid',
           gridTemplateColumns: `repeat(${numCols}, 30px)`,
@@ -142,5 +136,4 @@ const [grid, setGrid] = useState(() => {
 </>
         )
         }
-
-        export default Grid;
+export default Grid;
