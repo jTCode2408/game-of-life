@@ -1,11 +1,5 @@
-
 import React from 'react';
-
 import {AboutCont, RulesTitle, RulesItems,StoryP, StoryTitle, RulesList, RulesCont, WikP} from './styles'
-
-
-
-
 
 const About =() =>{
 
