@@ -3,6 +3,32 @@ import styled from 'styled-components'
 import stary2 from '../images/stary2.jpg'
 /////APP STYLES/////
 
+//chrome dev tools sizes
+const sizes={
+    mobileS: '320px',
+    mobileM: '375px',
+    mobileL: '425px',
+    tablet: '768px',
+    laptop: '1024px',
+    laptopL: '1440px',
+    desktop: '2560px'
+
+}
+
+const devices ={
+    mobileS: `(min-width: ${sizes.mobileS})`,
+    mobileM: `(min-width: ${sizes.mobileM})`,
+    mobileL: `(min-width: ${sizes.mobileL})`,
+    tablet: `(min-width: ${sizes.tablet})`,
+    laptop: `(min-width: ${sizes.laptop})`,
+    laptopL: `(min-width: ${sizes.laptopL})`,
+    desktop: `(min-width: ${sizes.desktop})`,
+    desktopL: `(min-width: ${sizes.desktop})`
+
+}
+
+
+
 export const AppCont = styled.div`
 text-align: center;
 display:flex;
