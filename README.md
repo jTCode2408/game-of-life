@@ -2,12 +2,26 @@
 https://game-of-life.jasmineterry.vercel.app/
 
 
-# game-of-life
-* Conway's Game Of Life coded in ReactJs *
+# Game-Of-Life
+* Implementation of Conway's Game Of Life, coded in ReactJs *
 
 # Built With:
 * ReactJS
 * Styled Components
+
+
+# Rules:
+* Any LIVE cell with 2 OR 3 live neighbors, lives to next generation. 
+* Any DEAD cell with 3 live neighbors, becomes alive in next generation.
+* All other live cells become DEAD in next generation, and dead cells STAY dead.
+
+# Specifications: 
+
+* Bootstrapped with Create-React-App in `game-of-life` folder
+* Rules, game info code found in `About.js` file
+* Main functionality for grid code found in `Grid.js` file
+* Variables for clearing grid, finding neighbor operation, and grid row/column generation code found in `Helpers.js` file
+* Styling for app found in `Styles.js` file
 
 
 # Research:
@@ -32,7 +46,9 @@ https://game-of-life.jasmineterry.vercel.app/
 * Anything computable can be computed in The Game of Life given a large enough grid and enough time (and perhaps patience)
 
 
-## Rules:
-* Any LIVE cell with 2 OR 3 live neighbors, lives to next generation. 
-* Any DEAD cell with 3 live neighbors, becomes alive in next generation.
-* All other live cells become DEAD in next generation, and dead cells STAY dead.
+# Contributions:
+
+## Have ideas for cool features to add? Or just ideas for improvement? 
+
+* Feel free to submit a PR with feature, updates, bugs via PR
+
